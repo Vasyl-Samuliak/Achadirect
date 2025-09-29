@@ -49,10 +49,10 @@ export default defineConfig({
       name: 'webkit',
       use: { ...devices['Desktop Safari'] },
     },
-    
+
     {
-       name: 'Mobile Chrome',
-       use: { ...devices['Pixel 5'] },
+      name: 'Mobile Chrome',
+      use: { ...devices['Pixel 5'] },
     },
     {
       name: 'Mobile Safari',
@@ -76,4 +76,3 @@ export default defineConfig({
   //   reuseExistingServer: !process.env.CI,
   // },
 });
-
