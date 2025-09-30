@@ -25,9 +25,12 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx playwright test
       env:
-        OS_NAME: ${{ matrix.os }}
+          OS_NAME: ${{ matrix.os }}
+          TEST_INVALID_EMAIL_FORMAT: ${{ secrets.TEST_INVALID_EMAIL_FORMAT }}
+          TEST_PASSWORD_FOR_INVALID_EMAIL_FORMAT: ${{ secrets.TEST_PASSWORD_FOR_INVALID_EMAIL_FORMAT }}
+      run: npx playwright test
+        
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
