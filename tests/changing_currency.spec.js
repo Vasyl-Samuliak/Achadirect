@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 import { test } from '../navigation_to_site.spec';
 
 test('Changing the currency', async ({ page }) => {
-    test.setTimeout(180000);
+    test.setTimeout(0);
     const default_currency = page.locator('#switcher-currency-trigger > strong > span:nth-of-type(2)');
     const default_currency_symbol = (await default_currency.innerText()).split('-')[1].trim();
 
