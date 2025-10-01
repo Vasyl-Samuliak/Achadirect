@@ -2,13 +2,34 @@
 import { expect } from '@playwright/test';
 import { test } from '../navigation_to_site.spec';
 
-test('Changing the currency', async ({ page }) => {
-    test.setTimeout(0);
-    const default_currency = page.locator('#switcher-currency-trigger > strong > span:nth-of-type(2)');
-    const default_currency_symbol = (await default_currency.innerText()).split('-')[1].trim();
+const currencies = {
+    "USD": "$",
+    "EUR": "€",
+    "GBP": "£",
+    "JPY": "¥",
+    "RUB": "RUB",
+    "AUD": "A$",
+    "CAD": "CA$",
+    "NZD": "NZ$",
+    "CHF": "CHF",
+    "SEK": "SEK",
+    "DKK": "DKK",
+    "PLN": "PLN",
+    "BRL": "R$",
+    "MXN": "MX$",
+    "ZAR": "R",
+    "THB": "THB",
+    "ARS": "ARS",
+};
 
-    const price = await page.locator('span.price').first().innerText();
-    expect(price).toContain(default_currency_symbol);
+test('Changing the currency', async ({ page }) => {
+    test.setTimeout(180000);
+    const default_currency = page.locator('#switcher-currency-trigger > strong > span:nth-of-type(2)');
+    const default_currency_code = (await default_currency.innerText()).split('-')[0].trim();
+
+    const price = await page.locator('span.price').nth(2).innerText();
+    // @ts-ignore
+    expect(price).toContain(currencies[default_currency_code]);
 
     const currency_switcher = page.locator('#switcher-currency');
     await currency_switcher.click();
@@ -25,10 +46,22 @@ test('Changing the currency', async ({ page }) => {
 
         await page.waitForURL('/');
         await page.waitForTimeout(1000);
-        
-        const currency_symbol = currencies_text[i].split('-')[1].trim();
-        const price = await page.locator('span.price').first().innerText();
-        expect(price).toContain(currency_symbol);
+
+        const changed_default_currency = page.locator('#switcher-currency-trigger > strong > span:nth-of-type(2)');
+        expect(await changed_default_currency.innerText()).toContain(currency_code);
+
+        // @ts-ignore
+        expect(await page.locator('span.price').nth(2).innerText()).toContain(currencies[currency_code]);
         await currency_switcher.click();
     }
+
+    const default_currency_option = page.locator(`li.currency-${default_currency_code}`).first();
+    await default_currency_option.scrollIntoViewIfNeeded();
+    await default_currency_option.click();
+
+    await page.waitForURL('/');
+    await page.waitForTimeout(1000);
+
+    // @ts-ignore
+    expect(await page.locator('span.price').nth(2).innerText()).toContain(currencies[default_currency_code]);
 });
