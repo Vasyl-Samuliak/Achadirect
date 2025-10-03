@@ -32,6 +32,12 @@ jobs:
           OS_NAME: ${{ matrix.os }}
           TEST_INVALID_EMAIL_FORMAT: ${{ secrets.TEST_INVALID_EMAIL_FORMAT }}
           TEST_PASSWORD_FOR_INVALID_EMAIL_FORMAT: ${{ secrets.TEST_PASSWORD_FOR_INVALID_EMAIL_FORMAT }}
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL}}
+          TEST_PHONE_NUMBER: ${{ secrets.TEST_PHONE_NUMBER }}
+          TEST_PASSWORD: ${{ secrets. TEST_PASSWORD }}
+          TEST_FIRSTNAME: ${{ secrets.TEST_FIRSTNAME }}
+          TEST_LASTNAME: ${{ secrets.TEST_LASTNAME }}
+          TEST_COUNTRY: ${{ secrets.TEST_COUNTRY }}
         
     - uses: actions/upload-artifact@v4
       if: ${{ always() }}
