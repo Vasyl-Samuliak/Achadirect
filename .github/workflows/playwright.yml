@@ -38,6 +38,8 @@ jobs:
           TEST_FIRSTNAME: ${{ secrets.TEST_FIRSTNAME }}
           TEST_LASTNAME: ${{ secrets.TEST_LASTNAME }}
           TEST_COUNTRY: ${{ secrets.TEST_COUNTRY }}
+          TEST_LOGIN_EMAIL: ${{ secrets.TEST_LOGIN_EMAIL}}
+          TEST_LOGIN_PASSWORD: ${{ secrets.TEST_LOGIN_PASSWORD }}
         
     - uses: actions/upload-artifact@v4
       if: ${{ always() }}
