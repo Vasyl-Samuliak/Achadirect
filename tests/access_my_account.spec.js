@@ -1,4 +1,3 @@
-require('dotenv').config();
 import { expect } from '@playwright/test';
 import { test } from '../login_account';
 
