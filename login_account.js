@@ -3,7 +3,7 @@ import { test as base } from '@playwright/test';
 
 export const test = base.extend({
     page: async ({ page }, use) => {
-        test.slow();
+        base.slow();
         await page.goto('/customer/account/login/');
 
         while(!(await page.getByRole('button', { name: 'DECLINE', exact: true }).isVisible())){
