@@ -13,11 +13,11 @@ test('Sign up', async ({ page }) => {
 
     await page.locator('input#firstname').click();
     // @ts-ignore
-    await page.locator('input#firstname').pressSequentially(process.env.TEST_FIRSTNAME, { delay: 150 });
+    await page.locator('input#firstname').pressSequentially(process.env.TEST_FIRSTNAME, { delay: 250 });
 
     await page.locator('input#lastname').click();
     // @ts-ignore
-    await page.locator('input#lastname').pressSequentially(process.env.TEST_LASTNAME, { delay: 150 });
+    await page.locator('input#lastname').pressSequentially(process.env.TEST_LASTNAME, { delay: 250 });
 
 
     const default_country = await page.locator('a.option-selected').first().innerText();

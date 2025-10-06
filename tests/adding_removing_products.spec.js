@@ -5,7 +5,7 @@ test('Adding and removing products', async ({ page, isMobile }) => {
 
     await page.waitForLoadState('domcontentloaded');
 
-    await page.locator('.product-item-link').first().click();
+    await page.locator('a.product-item-link').first().click();
     await page.waitForLoadState('domcontentloaded');
 
     await page.locator('input#add-to-all').click();
