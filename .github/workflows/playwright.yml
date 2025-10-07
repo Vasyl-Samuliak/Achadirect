@@ -69,12 +69,12 @@ jobs:
     - name: Download blob reports from GitHub Actions Artifacts
       uses: actions/download-artifact@v5
       with:
-        path: all-test-reports
+        path: playwright-report
         pattern: achadirect-tests-report-*
         merge-multiple: true
 
     - name: Merge into HTML Report
-      run: npx playwright merge-reports --reporter html ./all-test-reports
+      run: npx playwright merge-reports --reporter html ./playwright-report
 
     - name: Upload HTML report
       uses: actions/upload-artifact@v4
