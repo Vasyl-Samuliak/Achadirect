@@ -6,7 +6,9 @@ test('Proceed to checkout', async ({ page, isMobile }) => {
 
     await page.waitForLoadState('domcontentloaded');
 
-    await page.locator('a.product-item-link').first().click();
+    await page.locator('a.product-item-link').first().scrollIntoViewIfNeeded();
+    await page.locator('a.product-item-link').first().click({ force: true });
+
     await page.waitForLoadState('domcontentloaded');
 
     const price_text = (await page.locator('.price-wrapper').first().innerText()).toString();
@@ -15,6 +17,7 @@ test('Proceed to checkout', async ({ page, isMobile }) => {
     const firstDigitIndex = digit_match ? digit_match.index : -1;
 
     const price = parseFloat(price_text.substring(firstDigitIndex));
+
     const minimum_order_cost = 150;
     const quantity = Math.floor(minimum_order_cost / price) + 1;
 
@@ -34,6 +37,9 @@ test('Proceed to checkout', async ({ page, isMobile }) => {
     await expect(page.locator('#confirmBox').first()).toBeVisible();
 
     await page.goto('/checkout/cart/');
+    await page.waitForLoadState('domcontentloaded');
+
+    await page.locator('button.checkout').first().scrollIntoViewIfNeeded();
     await page.locator('button.checkout').first().click();
     await expect(page).toHaveURL('/checkout/');
 
