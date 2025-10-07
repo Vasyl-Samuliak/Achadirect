@@ -27,7 +27,7 @@ jobs:
       run: npx playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx playwright test tests/proceed_to_checkout.spec.js
+      run: npx playwright test tests/products_category_pages.spec.js
       env:
           OS_NAME: ${{ matrix.os }}
           TEST_INVALID_EMAIL_FORMAT: ${{ secrets.TEST_INVALID_EMAIL_FORMAT }}
