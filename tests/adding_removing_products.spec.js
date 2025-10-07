@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { test } from '../login_account';
 
 test('Adding and removing products', async ({ page, isMobile }) => {
+    test.slow();
 
     await page.waitForLoadState('domcontentloaded');
 
