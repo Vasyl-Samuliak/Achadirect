@@ -5,7 +5,13 @@ import { test } from '../navigation_to_site.spec';
 test('Redirection to quality certifications page after clicking on "Material Quality Certifications" link',
     async ({ page, isMobile }) => {
         test.slow();
-        
+
+        while (!(await page.getByRole('button', { name: 'DECLINE', exact: true }).isVisible())) {
+            await page.waitForTimeout(300);
+        }
+
+        await page.getByRole('button', { name: 'DECLINE', exact: true }).click();
+
         if (isMobile)
             await page.locator('span.nav-toggle').first().click();
 
