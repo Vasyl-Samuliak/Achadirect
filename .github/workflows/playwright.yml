@@ -43,42 +43,10 @@ jobs:
           TEST_LOGIN_EMAIL: ${{ secrets.TEST_LOGIN_EMAIL}}
           TEST_LOGIN_PASSWORD: ${{ secrets.TEST_LOGIN_PASSWORD }}
         
-    - name: Upload blob report to GitHub Actions Artifacts
+    - name: Upload html report to GitHub Actions Artifacts
       if: ${{ always() }}
       uses: actions/upload-artifact@v4
       with:
         name: achadirect-tests-report-${{ matrix.os }}-${{ matrix.shardIndex }}
         path: playwright-report/
         retention-days: 1
-
-
-  merge-reports:
-    # Merge reports after playwright-tests, even if some shards have failed
-    if: ${{ always() }}
-    needs: [playwright-tests]
-
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v5
-    - uses: actions/setup-node@v5
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Download blob reports from GitHub Actions Artifacts
-      uses: actions/download-artifact@v5
-      with:
-        path: playwright-report
-        pattern: achadirect-tests-report-*
-        merge-multiple: true
-
-    - name: Merge into HTML Report
-      run: npx playwright merge-reports --reporter html ./playwright-report
-
-    - name: Upload HTML report
-      uses: actions/upload-artifact@v4
-      with:
-        name: html-report--attempt-${{ github.run_attempt }}
-        path: playwright-report
-        retention-days: 14
