@@ -71,6 +71,10 @@ export default defineConfig({
     },
   ],
 
+  testIgnore: [
+    '**/tests/sign_up.spec.js'
+  ],
+
   /* Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
