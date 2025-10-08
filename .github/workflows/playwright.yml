@@ -10,7 +10,7 @@ jobs:
   playwright-tests:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [macos-latest, windows-latest]
     
     timeout-minutes: 240
     runs-on: ${{ matrix.os }}
